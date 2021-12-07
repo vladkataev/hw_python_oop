@@ -23,17 +23,24 @@ class InfoMessage:
 
 class Training:
     """Базовый класс тренировки."""
-    LEN_STEP: float = 0.65  # расстояние, которое спортсмен преодолевает за один шаг в метрах
-    M_IN_KM: int = 1000     # константа для перевода значений из метров в километры
-    H_IN_M: int = 60        # константа для перевода значений из часов в минуты
+    # расстояние, которое спортсмен преодолевает за один шаг в метрах
+    LEN_STEP: float = 0.65
+    # константа для перевода значений из метров в километры
+    M_IN_KM: int = 1000
+    # константа для перевода значений из часов в минуты
+    H_IN_M: int = 60
 
     def __init__(self,
                  action: int,
                  duration: float,
                  weight: float) -> None:
-        self.action = action        # количество совершённых действий (число шагов при ходьбе и беге либо гребков — при плавании)
-        self.duration = duration    # длительность тренировки в часах
-        self.weight = weight        # вес спортсмена в килограммах
+        # количество совершённых действий
+        # (число шагов при ходьбе и беге либо гребков — при плавании)
+        self.action = action
+        # длительность тренировки в часах
+        self.duration = duration
+        # вес спортсмена в килограммах
+        self.weight = weight
 
     def get_distance(self) -> float:
         """Получить дистанцию в км."""
@@ -60,8 +67,10 @@ class Training:
 
 class Running(Training):
     """Тренировка: бег."""
-    COEFF_CALORIE_1: int = 18   # константа для расчета калорий при беге
-    COEFF_CALORIE_2: int = 20   # константа 2 для расчета калорий при беге
+    # константа для расчета калорий при беге
+    COEFF_CALORIE_1: int = 18
+    # константа 2 для расчета калорий при беге
+    COEFF_CALORIE_2: int = 20
 
     def get_spent_calories(self) -> float:
         self.duration_min = self.duration * self.H_IN_M
@@ -72,8 +81,10 @@ class Running(Training):
 
 class SportsWalking(Training):
     """Тренировка: спортивная ходьба."""
-    COEFF_CALORIE_1: float = 0.035  # константа для расчета калорий при хотьбе
-    COEFF_CALORIE_2: float = 0.029  # константа 2 для расчета калорий при хотьбе
+    # константа для расчета калорий при хотьбе
+    COEFF_CALORIE_1: float = 0.035
+    # константа 2 для расчета калорий при хотьбе
+    COEFF_CALORIE_2: float = 0.029
 
     def __init__(self,
                  action: int,
@@ -81,7 +92,8 @@ class SportsWalking(Training):
                  weight: float,
                  height: float) -> None:
         super().__init__(action, duration, weight)
-        self.height = height    # рост пользователя в сантиметрах
+        # рост пользователя в сантиметрах
+        self.height = height
 
     def get_spent_calories(self) -> float:
         self.duration_min = self.duration * self.H_IN_M
@@ -92,9 +104,12 @@ class SportsWalking(Training):
 
 class Swimming(Training):
     """Тренировка: плавание."""
-    LEN_STEP: float = 1.38          # расстояние, преодолеваемое за один гребок при плавании в метрах
-    COEFF_CALORIE_1: float = 1.1    # константа для расчета калорий при плавании
-    COEFF_CALORIE_2: int = 2        # константа 2 для расчета калорий при плавании
+    # расстояние, преодолеваемое за один гребок при плавании в метрах
+    LEN_STEP: float = 1.38
+    # константа для расчета калорий при плавании
+    COEFF_CALORIE_1: float = 1.1
+    # константа 2 для расчета калорий при плавании
+    COEFF_CALORIE_2: int = 2
 
     def __init__(self,
                  action: int,
@@ -103,8 +118,10 @@ class Swimming(Training):
                  length_pool: int,
                  count_pool: int) -> None:
         super().__init__(action, duration, weight)
-        self.length_pool = length_pool  # длинна бассейна в метрах
-        self.count_pool = count_pool    # сколько раз пользователь переплыл бассейн
+        # длинна бассейна в метрах
+        self.length_pool = length_pool
+        # сколько раз пользователь переплыл бассейн
+        self.count_pool = count_pool
 
     def get_mean_speed(self) -> float:
         return (self.length_pool
